@@ -1,0 +1,2736 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1f8203ed229866597f03cbc37979a810 {
+                    position: relative;
+                    width: 100.0vw;
+                    height: 100.0vh;
+
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div id="geo-control-panel" style="
+    position: absolute;
+    top: 400px;
+    left: 10px;
+    z-index: 10000;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 200px;
+">
+    <div style="font-weight:bold; font-size:14px; text-align:center; border-bottom:1px solid #ccc; padding-bottom:4px; margin-bottom:4px;">
+        📍 MI POSICIÓN
+    </div>
+    
+    <button id="btn-geolocalizar" style="
+        background:#1E90FF; color:white; border:none; border-radius:6px;
+        padding:8px 12px; cursor:pointer; font-size:12px; font-weight:bold;
+        width:100%;
+    ">📡 Activar GPS</button>
+    
+    <div id="geo-info" style="
+        font-size:11px; color:#555; text-align:center; margin-top:4px;
+        display:none;
+    ">Buscando tu posición...</div>
+</div>
+
+<style>
+    .marker-mi-posicion {
+        font-size: 24px;
+        background-color: #FF4500;
+        border: 3px solid white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        width: 40px;
+        height: 40px;
+        animation: pulso 1.5s infinite;
+    }
+    @keyframes pulso {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,69,0,0.7); }
+        70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(255,69,0,0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,69,0,0); }
+    }
+</style>
+
+<script>
+    var marcadorMiPosicion = null;
+    var watchId = null;
+    var mapaGps = null;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Intentar obtener la referencia al mapa de Leaflet
+        setTimeout(function() {
+            // Buscar el objeto mapa en window
+            for (var key in window) {
+                if (window[key] && window[key] instanceof L.Map) {
+                    mapaGps = window[key];
+                    break;
+                }
+            }
+        }, 500);
+    });
+    
+    function activarGps() {
+        if (!navigator.geolocation) {
+            alert("Tu navegador no soporta geolocalización.");
+            return;
+        }
+        
+        var btn = document.getElementById('btn-geolocalizar');
+        var info = document.getElementById('geo-info');
+        
+        if (watchId !== null) {
+            // Desactivar seguimiento
+            navigator.geolocation.clearWatch(watchId);
+            watchId = null;
+            if (marcadorMiPosicion && mapaGps) {
+                mapaGps.removeLayer(marcadorMiPosicion);
+                marcadorMiPosicion = null;
+            }
+            btn.innerHTML = "📡 Activar GPS";
+            btn.style.background = "#1E90FF";
+            info.style.display = "none";
+            return;
+        }
+        
+        // Activar seguimiento
+        btn.innerHTML = "⏹️ Desactivar GPS";
+        btn.style.background = "#DC143C";
+        info.style.display = "block";
+        info.innerHTML = "Buscando tu posición...";
+        
+        var opciones = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        };
+        
+        watchId = navigator.geolocation.watchPosition(
+            function(posicion) {
+                var lat = posicion.coords.latitude;
+                var lon = posicion.coords.longitude;
+                var precision = Math.round(posicion.coords.accuracy);
+                
+                info.innerHTML = "Lat: " + lat.toFixed(4) + "<br>Lon: " + lon.toFixed(4) + "<br>±" + precision + "m";
+                
+                if (!marcadorMiPosicion) {
+                    var iconoMiPosicion = L.divIcon({
+                        className: 'marker-mi-posicion',
+                        html: '📍',
+                        iconSize: [40, 40],
+                        iconAnchor: [20, 20]
+                    });
+                    
+                    marcadorMiPosicion = L.marker([lat, lon], {
+                        icon: iconoMiPosicion,
+                        title: 'Tu posición'
+                    }).addTo(mapaGps);
+                } else {
+                    marcadorMiPosicion.setLatLng([lat, lon]);
+                }
+                
+                // Centrar mapa suavemente en la nueva posición
+                mapaGps.panTo([lat, lon]);
+            },
+            function(error) {
+                var mensaje = "Error al obtener posición: ";
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        mensaje += "Has denegado el acceso al GPS.";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        mensaje += "La información de ubicación no está disponible.";
+                        break;
+                    case error.TIMEOUT:
+                        mensaje += "La solicitud ha expirado.";
+                        break;
+                    default:
+                        mensaje += "Error desconocido.";
+                        break;
+                }
+                info.innerHTML = mensaje;
+                info.style.color = "#DC143C";
+            },
+            opciones
+        );
+    }
+    
+    document.getElementById('btn-geolocalizar').addEventListener('click', activarGps);
+</script>
+    
+            <div class="folium-map" id="map_1f8203ed229866597f03cbc37979a810" ></div>
+        
+    
+<div id='maplegend' style='
+    position: absolute; z-index:9999; border:2px solid #333; background-color:rgba(255, 255, 255, 0.96);
+    border-radius:8px; padding: 12px 14px; font-size:12px; right: 20px; top: 20px; width: 280px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35); font-family: Arial, sans-serif;
+'>
+  <div style='font-size:15px; font-weight:bold; margin-bottom:8px; border-bottom:2px solid #222; padding-bottom:4px; text-align:center;'>
+    🗺️ MAPA MAESTRO PRAGA 2026<br><span style='font-size:11px; font-weight:normal; color:#444;'>24 al 28 de Noviembre</span>
+  </div>
+  
+  <div style='margin-bottom:6px;'>🏡 <b>Alojamiento</b> (Štefánikova 55)</div>
+  <div style='margin-bottom:6px;'>🏰 <b>Monumentos Principales</b> (Naranja)</div>
+  <div style='margin-bottom:6px;'>🌿 <b>Sugerencias Prácticas</b> (Verde claro)</div>
+  <div style='margin-bottom:6px;'>🎄 <b>Mercados Navideños</b> (Rojo / Dorado)</div>
+  <div style='margin-bottom:6px;'>☕ <b>Gastronomía / Supermercados</b> (Marrón/Verde)</div>
+  <div style='margin-bottom:6px;'>🚇 <b>Transporte:</b> Metro (Azul), Tranvía (Verde), Bus (Naranja), Tren (Morado), Funicular (Rosa)</div>
+  
+  <hr style='margin:8px 0; border:0; border-top:1px solid #ccc;'>
+  <div style='font-size:11px; color:#444;'>
+    • Nombres visibles directamente en el mapa.<br>
+    • Pulsa cualquier icono para ver horarios.<br>
+    • Usa el menú superior izquierdo para capas.
+  </div>
+</div>
+
+<style type='text/css'>
+  /* Evitar que Leaflet corte o recorte letras de las etiquetas */
+  .leaflet-div-icon {
+    background: transparent !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+  
+  /* Aumentar contraste y nitidez de las calles en pantalla */
+  .leaflet-tile {
+    filter: contrast(125%) saturate(130%) brightness(96%) !important;
+    -webkit-filter: contrast(125%) saturate(130%) brightness(96%) !important;
+  }
+  
+  /* Reglas exclusivas para Impresión / PDF */
+  @media print {
+    #maplegend { border: 1px solid #777 !important; box-shadow: none !important; top: 10px !important; right: 10px !important; }
+    .leaflet-control-zoom, .leaflet-control-layers { display: none !important; }
+    body, html, #map { height: 99% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+    @page { size: A4 portrait; margin: 0; }
+    
+    .leaflet-div-icon {
+      overflow: visible !important;
+    }
+    
+    /* Forzar al navegador a imprimir el mapa con contraste nítido y sin fondo blanco lavado */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .leaflet-tile {
+      filter: contrast(135%) saturate(140%) brightness(92%) !important;
+      -webkit-filter: contrast(135%) saturate(140%) brightness(92%) !important;
+    }
+  }
+</style>
+</body>
+<script>
+    
+    
+            var map_1f8203ed229866597f03cbc37979a810 = L.map(
+                "map_1f8203ed229866597f03cbc37979a810",
+                {
+                    center: [50.0815, 14.4175],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a8fdb63750cc515756f0016fd480e229 = L.tileLayer(
+                "https://mt1.google.com/vt/lyrs=m\u0026hl=es\u0026x={x}\u0026y={y}\u0026z={z}",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; Google Maps",
+  "subdomains": [
+"mt0",
+"mt1",
+"mt2",
+"mt3",
+],
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a8fdb63750cc515756f0016fd480e229.addTo(map_1f8203ed229866597f03cbc37979a810);
+        
+    
+            var tile_layer_9821f6da225a64d4b33ee84f222077f3 = L.tileLayer(
+                "https://mt1.google.com/vt/lyrs=p\u0026hl=es\u0026x={x}\u0026y={y}\u0026z={z}",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; Google Maps",
+  "subdomains": [
+"mt0",
+"mt1",
+"mt2",
+"mt3",
+],
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            var tile_layer_b54f5d13b73a1222029db69e8c2bddea = L.tileLayer(
+                "https://mt1.google.com/vt/lyrs=y\u0026hl=es\u0026x={x}\u0026y={y}\u0026z={z}",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; Google Maps",
+  "subdomains": [
+"mt0",
+"mt1",
+"mt2",
+"mt3",
+],
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            var tile_layer_a04ea0a19b4defc8d6d3a1659f9b7d51 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_5brn_1_0c00284354b6d80e542b2a0b",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; OpenStreetMap contributors \u0026copy; CARTO",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            map_1f8203ed229866597f03cbc37979a810.fitBounds(
+                [[50.066, 14.394], [50.0945, 14.44]],
+                {}
+            );
+        
+    
+            var feature_group_8fa7f9a5d59207f094005815cda8603b = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fc822377d90896b8d96b618ea3da6de7 = L.marker(
+                [50.0754, 14.4036],
+                {
+}
+            ).addTo(feature_group_8fa7f9a5d59207f094005815cda8603b);
+        
+    
+            var div_icon_914d4a418b58718c21100f65f9056797 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #1E90FF;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udfe1\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003e\u0160tef\u00e1nikova 55\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_fc822377d90896b8d96b618ea3da6de7.bindTooltip(
+                `<div>
+                     Štefánikova 55 (Alojamiento)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_e3a1a86a26427a4082e27f932f3c8117 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e53250da56cbdb99de15e62b0d757c4d = $(`<div id="html_e53250da56cbdb99de15e62b0d757c4d" style="width: 100.0%; height: 100.0%;"><b>🏡 ALOJAMIENTO BASE</b><br>Štefánikova 55, Smíchov<br><br>✅ Abono 72h: Metro Anděl<br>✅ App PID Lítačka<br>✅ Niños (6-14a): GRATIS con DNI</div>`)[0];
+                popup_e3a1a86a26427a4082e27f932f3c8117.setContent(html_e53250da56cbdb99de15e62b0d757c4d);
+            
+        
+
+        marker_fc822377d90896b8d96b618ea3da6de7.bindPopup(popup_e3a1a86a26427a4082e27f932f3c8117)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_fc822377d90896b8d96b618ea3da6de7.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_fc822377d90896b8d96b618ea3da6de7.setIcon(div_icon_914d4a418b58718c21100f65f9056797);
+            
+    
+            feature_group_8fa7f9a5d59207f094005815cda8603b.addTo(map_1f8203ed229866597f03cbc37979a810);
+        
+    
+            var feature_group_064bbffaf729cd90dcc0b833d37151f4 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_984feb5f0c7ec7edd606c6385e5eb230 = L.marker(
+                [50.0899, 14.3988],
+                {
+}
+            ).addTo(feature_group_064bbffaf729cd90dcc0b833d37151f4);
+        
+    
+            var div_icon_e48a9a048b2c20a6544c951dee58823b = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udff0\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eCastillo de Praga\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_984feb5f0c7ec7edd606c6385e5eb230.bindTooltip(
+                `<div>
+                     Castillo de Praga
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_c857532d0ef7ecd81a9b154770fae11b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eac35c6bf0dfea1e68d5ada03c605775 = $(`<div id="html_eac35c6bf0dfea1e68d5ada03c605775" style="width: 100.0%; height: 100.0%;"><b>🏰 CASTILLO DE PRAGA</b><br>Puerta de entrada y patios de la guardia<br>🕐 Horario invierno: 09:00 – 16:00 h<br>⚠️ Cierre estricto 16:00 h<br>💡 Visitar a las 09:30 h</div>`)[0];
+                popup_c857532d0ef7ecd81a9b154770fae11b.setContent(html_eac35c6bf0dfea1e68d5ada03c605775);
+            
+        
+
+        marker_984feb5f0c7ec7edd606c6385e5eb230.bindPopup(popup_c857532d0ef7ecd81a9b154770fae11b)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_984feb5f0c7ec7edd606c6385e5eb230.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_984feb5f0c7ec7edd606c6385e5eb230.setIcon(div_icon_e48a9a048b2c20a6544c951dee58823b);
+            
+    
+            var marker_989e313b86caed8eda29cd9aae29ff7a = L.marker(
+                [50.0909, 14.4005],
+                {
+}
+            ).addTo(feature_group_064bbffaf729cd90dcc0b833d37151f4);
+        
+    
+            var div_icon_c427593abb048d8e3560f3ffdeac0a4c = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\u26ea\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eCatedral San Vito\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_989e313b86caed8eda29cd9aae29ff7a.bindTooltip(
+                `<div>
+                     Catedral de San Vito
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_91edbf80d0c6a47425a862ade7d36e32 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7a2c76dfb9deddbc3c13da83bcf3b4c4 = $(`<div id="html_7a2c76dfb9deddbc3c13da83bcf3b4c4" style="width: 100.0%; height: 100.0%;"><b>⛪ CATEDRAL DE SAN VITO</b><br>📍 Tercer patio del Castillo<br>🕐 09:00 – 16:00 h</div>`)[0];
+                popup_91edbf80d0c6a47425a862ade7d36e32.setContent(html_7a2c76dfb9deddbc3c13da83bcf3b4c4);
+            
+        
+
+        marker_989e313b86caed8eda29cd9aae29ff7a.bindPopup(popup_91edbf80d0c6a47425a862ade7d36e32)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_989e313b86caed8eda29cd9aae29ff7a.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_989e313b86caed8eda29cd9aae29ff7a.setIcon(div_icon_c427593abb048d8e3560f3ffdeac0a4c);
+            
+    
+            var marker_9d9dbc37b91c85cb0257a36fa93615a8 = L.marker(
+                [50.0865, 14.4114],
+                {
+}
+            ).addTo(feature_group_064bbffaf729cd90dcc0b833d37151f4);
+        
+    
+            var div_icon_0c0ff636be5c00bfd78ab6c24e966fe9 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf09\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003ePuente de Carlos\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_9d9dbc37b91c85cb0257a36fa93615a8.bindTooltip(
+                `<div>
+                     Puente de Carlos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_9aa05a10212399bd4b3c79aa1e262e71 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1bd9305357a9ba97b685ca2a76390cc3 = $(`<div id="html_1bd9305357a9ba97b685ca2a76390cc3" style="width: 100.0%; height: 100.0%;"><b>🌉 PUENTE DE CARLOS</b><br>🌅 Atardecer recomendado (16:00 h iluminado)<br>⚠️ Multitudes: 11:30–15:00 h</div>`)[0];
+                popup_9aa05a10212399bd4b3c79aa1e262e71.setContent(html_1bd9305357a9ba97b685ca2a76390cc3);
+            
+        
+
+        marker_9d9dbc37b91c85cb0257a36fa93615a8.bindPopup(popup_9aa05a10212399bd4b3c79aa1e262e71)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_9d9dbc37b91c85cb0257a36fa93615a8.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_9d9dbc37b91c85cb0257a36fa93615a8.setIcon(div_icon_0c0ff636be5c00bfd78ab6c24e966fe9);
+            
+    
+            var marker_97de712c14d4dd68be8be1bcf2b9b1dc = L.marker(
+                [50.0875, 14.4211],
+                {
+}
+            ).addTo(feature_group_064bbffaf729cd90dcc0b833d37151f4);
+        
+    
+            var div_icon_34593a07d63c83ad0ee75ad65c75a867 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf06\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003ePlaza Ciudad Vieja\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_97de712c14d4dd68be8be1bcf2b9b1dc.bindTooltip(
+                `<div>
+                     Plaza de la Ciudad Vieja
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_5fe6524140b0c8785499f02bbbea56fc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_683d08128a9c8e3ba516e17771277cea = $(`<div id="html_683d08128a9c8e3ba516e17771277cea" style="width: 100.0%; height: 100.0%;"><b>🌆 PLAZA DE LA CIUDAD VIEJA</b><br>⭐ Corazón histórico de Praga</div>`)[0];
+                popup_5fe6524140b0c8785499f02bbbea56fc.setContent(html_683d08128a9c8e3ba516e17771277cea);
+            
+        
+
+        marker_97de712c14d4dd68be8be1bcf2b9b1dc.bindPopup(popup_5fe6524140b0c8785499f02bbbea56fc)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_97de712c14d4dd68be8be1bcf2b9b1dc.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_97de712c14d4dd68be8be1bcf2b9b1dc.setIcon(div_icon_34593a07d63c83ad0ee75ad65c75a867);
+            
+    
+            var marker_8f1e45fe4b5d210d2ad13d6439937e5d = L.marker(
+                [50.0869, 14.4205],
+                {
+}
+            ).addTo(feature_group_064bbffaf729cd90dcc0b833d37151f4);
+        
+    
+            var div_icon_32d2fa29b28b233d7edcea68f44a63fb = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\u23f0\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eReloj Astron\u00f3mico\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_8f1e45fe4b5d210d2ad13d6439937e5d.bindTooltip(
+                `<div>
+                     Reloj Astronómico
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_e8f158581a83097fb45f4533caadbb67 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bbab0907ba544bd76209b179096e187c = $(`<div id="html_bbab0907ba544bd76209b179096e187c" style="width: 100.0%; height: 100.0%;"><b>⏰ RELOJ ASTRONÓMICO</b><br>Torre del Ayuntamiento (fachada sur)<br>🎭 Figuras cada hora en punto (09:00–23:00 h)<br>💡 Estar a las 10:50 h</div>`)[0];
+                popup_e8f158581a83097fb45f4533caadbb67.setContent(html_bbab0907ba544bd76209b179096e187c);
+            
+        
+
+        marker_8f1e45fe4b5d210d2ad13d6439937e5d.bindPopup(popup_e8f158581a83097fb45f4533caadbb67)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_8f1e45fe4b5d210d2ad13d6439937e5d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_8f1e45fe4b5d210d2ad13d6439937e5d.setIcon(div_icon_32d2fa29b28b233d7edcea68f44a63fb);
+            
+    
+            var marker_1415f35d277f5194587e4da30d294992 = L.marker(
+                [50.0878, 14.4228],
+                {
+}
+            ).addTo(feature_group_064bbffaf729cd90dcc0b833d37151f4);
+        
+    
+            var div_icon_2aa062a8039a434f898d78e8a267609b = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\u26ea\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eIglesia de T\u00fdn\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_1415f35d277f5194587e4da30d294992.bindTooltip(
+                `<div>
+                     Iglesia de Týn
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_4697cf72d2b802a5cd82e1a64d8c4886 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8a41ddfa04f02d231568adfc989d799b = $(`<div id="html_8a41ddfa04f02d231568adfc989d799b" style="width: 100.0%; height: 100.0%;"><b>⛪ IGLESIA DE TÝN</b><br>🕐 10:00–13:00 y 15:00–17:00 h<br>⚠️ Cierra al mediodía (13:00–15:00 h) y lunes</div>`)[0];
+                popup_4697cf72d2b802a5cd82e1a64d8c4886.setContent(html_8a41ddfa04f02d231568adfc989d799b);
+            
+        
+
+        marker_1415f35d277f5194587e4da30d294992.bindPopup(popup_4697cf72d2b802a5cd82e1a64d8c4886)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_1415f35d277f5194587e4da30d294992.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_1415f35d277f5194587e4da30d294992.setIcon(div_icon_2aa062a8039a434f898d78e8a267609b);
+            
+    
+            var marker_23197ab9c2fcf39429ad58c217622286 = L.marker(
+                [50.0897, 14.4172],
+                {
+}
+            ).addTo(feature_group_064bbffaf729cd90dcc0b833d37151f4);
+        
+    
+            var div_icon_51427745dc50680e699feea3ea1da05a = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\u2721\ufe0f\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eBarrio Jud\u00edo\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_23197ab9c2fcf39429ad58c217622286.bindTooltip(
+                `<div>
+                     Barrio Judío (Josefov)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_63cde1cf9450841df72957c1a58d214e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_df13988db5d2c54284e0d670505285ea = $(`<div id="html_df13988db5d2c54284e0d670505285ea" style="width: 100.0%; height: 100.0%;"><b>✡️ BARRIO JUDÍO (Josefov)</b><br>🕐 09:00–16:30 h<br>⚠️ CERRADO los SÁBADOS (Sabbat). Jueves 26 abierto.</div>`)[0];
+                popup_63cde1cf9450841df72957c1a58d214e.setContent(html_df13988db5d2c54284e0d670505285ea);
+            
+        
+
+        marker_23197ab9c2fcf39429ad58c217622286.bindPopup(popup_63cde1cf9450841df72957c1a58d214e)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_23197ab9c2fcf39429ad58c217622286.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_23197ab9c2fcf39429ad58c217622286.setIcon(div_icon_51427745dc50680e699feea3ea1da05a);
+            
+    
+            feature_group_064bbffaf729cd90dcc0b833d37151f4.addTo(map_1f8203ed229866597f03cbc37979a810);
+        
+    
+            var feature_group_8568b01948f0e2804d66c86960026d36 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_289f5194acbc96867f1dcc1d9e80fd3d = L.marker(
+                [50.0848, 14.4082],
+                {
+}
+            ).addTo(feature_group_8568b01948f0e2804d66c86960026d36);
+        
+    
+            var div_icon_1dcb58a2c386286e46932178980c9608 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #90EE90;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf33\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eIsla de Kampa\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_289f5194acbc96867f1dcc1d9e80fd3d.bindTooltip(
+                `<div>
+                     Isla de Kampa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_b383022332ed107d31cfaf2f67e51539 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ed3e57c8a58027a48039d3e371f23dd3 = $(`<div id="html_ed3e57c8a58027a48039d3e371f23dd3" style="width: 100.0%; height: 100.0%;"><b>🌳 ISLA DE KAMPA</b><br>👶 Bebés gigantes de bronce y parque infantil</div>`)[0];
+                popup_b383022332ed107d31cfaf2f67e51539.setContent(html_ed3e57c8a58027a48039d3e371f23dd3);
+            
+        
+
+        marker_289f5194acbc96867f1dcc1d9e80fd3d.bindPopup(popup_b383022332ed107d31cfaf2f67e51539)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_289f5194acbc96867f1dcc1d9e80fd3d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_289f5194acbc96867f1dcc1d9e80fd3d.setIcon(div_icon_1dcb58a2c386286e46932178980c9608);
+            
+    
+            var marker_f5bb37c56766de346b804ee4f94b4452 = L.marker(
+                [50.0862, 14.4068],
+                {
+}
+            ).addTo(feature_group_8568b01948f0e2804d66c86960026d36);
+        
+    
+            var div_icon_2e4078e7c552529af4d8330513a83f9d = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #90EE90;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udfa8\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMuro John Lennon\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_f5bb37c56766de346b804ee4f94b4452.bindTooltip(
+                `<div>
+                     Muro de John Lennon
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_8a59d2f7c72058d238dcab2908ad4b79 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cb0af63220ba11671b7fb0fea33b199e = $(`<div id="html_cb0af63220ba11671b7fb0fea33b199e" style="width: 100.0%; height: 100.0%;"><b>🎨 MURO DE JOHN LENNON</b><br>🎸 Arte urbano, símbolos de la paz y guitarras</div>`)[0];
+                popup_8a59d2f7c72058d238dcab2908ad4b79.setContent(html_cb0af63220ba11671b7fb0fea33b199e);
+            
+        
+
+        marker_f5bb37c56766de346b804ee4f94b4452.bindPopup(popup_8a59d2f7c72058d238dcab2908ad4b79)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_f5bb37c56766de346b804ee4f94b4452.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f5bb37c56766de346b804ee4f94b4452.setIcon(div_icon_2e4078e7c552529af4d8330513a83f9d);
+            
+    
+            var marker_e18ce0c8bb5f21f61b3b27cc91bd452c = L.marker(
+                [50.0873, 14.4278],
+                {
+}
+            ).addTo(feature_group_8568b01948f0e2804d66c86960026d36);
+        
+    
+            var div_icon_d56c0ed4ace6e08a88b7faf0310daf2a = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #90EE90;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udff0\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTorre de la P\u00f3lvora\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_e18ce0c8bb5f21f61b3b27cc91bd452c.bindTooltip(
+                `<div>
+                     Torre de la Pólvora
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_5673732bb14ad78fb85066ca274117e7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_99697115ddaf0354dfcb008df4eaaee8 = $(`<div id="html_99697115ddaf0354dfcb008df4eaaee8" style="width: 100.0%; height: 100.0%;"><b>🏰 TORRE DE LA PÓLVORA</b><br>186 escalones. Subir de día (antes 16:00 h).</div>`)[0];
+                popup_5673732bb14ad78fb85066ca274117e7.setContent(html_99697115ddaf0354dfcb008df4eaaee8);
+            
+        
+
+        marker_e18ce0c8bb5f21f61b3b27cc91bd452c.bindPopup(popup_5673732bb14ad78fb85066ca274117e7)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_e18ce0c8bb5f21f61b3b27cc91bd452c.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e18ce0c8bb5f21f61b3b27cc91bd452c.setIcon(div_icon_d56c0ed4ace6e08a88b7faf0310daf2a);
+            
+    
+            var marker_b68a381af3079d6277db6000db7cdb1e = L.marker(
+                [50.0862, 14.4239],
+                {
+}
+            ).addTo(feature_group_8568b01948f0e2804d66c86960026d36);
+        
+    
+            var div_icon_a9bb866032394e85092a0ca3014afba7 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #90EE90;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf93\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eUniv. Carolina\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_b68a381af3079d6277db6000db7cdb1e.bindTooltip(
+                `<div>
+                     Universidad Carolina
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_41e7d8fe5476eaa5752d3afdfbcaa50d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_28821ad0bf65a032b12dadbecbf962dc = $(`<div id="html_28821ad0bf65a032b12dadbecbf962dc" style="width: 100.0%; height: 100.0%;"><b>🎓 UNIVERSIDAD CAROLINA</b><br>Edificio histórico junto al Teatro</div>`)[0];
+                popup_41e7d8fe5476eaa5752d3afdfbcaa50d.setContent(html_28821ad0bf65a032b12dadbecbf962dc);
+            
+        
+
+        marker_b68a381af3079d6277db6000db7cdb1e.bindPopup(popup_41e7d8fe5476eaa5752d3afdfbcaa50d)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_b68a381af3079d6277db6000db7cdb1e.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_b68a381af3079d6277db6000db7cdb1e.setIcon(div_icon_a9bb866032394e85092a0ca3014afba7);
+            
+    
+            var marker_fcb5fd9b22e23a157e62cc4e4590cead = L.marker(
+                [50.0861, 14.4234],
+                {
+}
+            ).addTo(feature_group_8568b01948f0e2804d66c86960026d36);
+        
+    
+            var div_icon_c75e01a08aa531ffc4dd4eac7450a8f8 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #90EE90;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udfad\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTeatro Estamentos\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_fcb5fd9b22e23a157e62cc4e4590cead.bindTooltip(
+                `<div>
+                     Teatro de los Estamentos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_a2b2de855e4676e4e78ae38c422c3b80 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_80ebb120086e2860207ed4d7aeae1cfb = $(`<div id="html_80ebb120086e2860207ed4d7aeae1cfb" style="width: 100.0%; height: 100.0%;"><b>🎭 TEATRO DE LOS ESTAMENTOS</b><br>Estatua sin rostro de Il Commendatore (exterior libre 24h)</div>`)[0];
+                popup_a2b2de855e4676e4e78ae38c422c3b80.setContent(html_80ebb120086e2860207ed4d7aeae1cfb);
+            
+        
+
+        marker_fcb5fd9b22e23a157e62cc4e4590cead.bindPopup(popup_a2b2de855e4676e4e78ae38c422c3b80)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_fcb5fd9b22e23a157e62cc4e4590cead.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_fcb5fd9b22e23a157e62cc4e4590cead.setIcon(div_icon_c75e01a08aa531ffc4dd4eac7450a8f8);
+            
+    
+            var marker_2c098e2319b1d2967ca1535b8b88e7c8 = L.marker(
+                [50.0817, 14.4202],
+                {
+}
+            ).addTo(feature_group_8568b01948f0e2804d66c86960026d36);
+        
+    
+            var div_icon_61abbf93f840773bbb9f1cafe0975f65 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #90EE90;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\uddff\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eCabeza de Kafka\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_2c098e2319b1d2967ca1535b8b88e7c8.bindTooltip(
+                `<div>
+                     C.C. Quadrio y Cabeza de Kafka
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_d3eec1d21d025d1b022c22cfbcfee74f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_caea253ad0724db64e7bc926f2f26c9e = $(`<div id="html_caea253ad0724db64e7bc926f2f26c9e" style="width: 100.0%; height: 100.0%;"><b>🗿 C.C. QUADRIO Y CABEZA DE KAFKA</b><br>🔄 Escultura cinética que gira cada hora (15 min)<br>🍽️ Food court y Billa para comer caliente</div>`)[0];
+                popup_d3eec1d21d025d1b022c22cfbcfee74f.setContent(html_caea253ad0724db64e7bc926f2f26c9e);
+            
+        
+
+        marker_2c098e2319b1d2967ca1535b8b88e7c8.bindPopup(popup_d3eec1d21d025d1b022c22cfbcfee74f)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_2c098e2319b1d2967ca1535b8b88e7c8.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_2c098e2319b1d2967ca1535b8b88e7c8.setIcon(div_icon_61abbf93f840773bbb9f1cafe0975f65);
+            
+    
+            var marker_a3de60d1e25245ed39c78a5e78fed2c2 = L.marker(
+                [50.0792, 14.4302],
+                {
+}
+            ).addTo(feature_group_8568b01948f0e2804d66c86960026d36);
+        
+    
+            var div_icon_d2f5def23a7f4575a8bb77226037df5d = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #90EE90;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udfdb\ufe0f\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMuseo Nacional\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_a3de60d1e25245ed39c78a5e78fed2c2.bindTooltip(
+                `<div>
+                     Museo Nacional de Praga
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_3a0d806d6258e7775c84e401ad002416 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_df78a6343135b511980b894dc5791422 = $(`<div id="html_df78a6343135b511980b894dc5791422" style="width: 100.0%; height: 100.0%;"><b>🏛️ MUSEO NACIONAL (Národní muzeum)</b><br>📍 Václavské náměstí 68 (cabecera Plaza de Wenceslao)<br>🕐 Horario: 10:00 – 18:00 h (todos los días)<br>🎫 Niños menores de 15 años: GRATIS<br>💰 Adultos: ~280 CZK (~11 €)<br><br>👶 <b>Para los peques:</b><br>• 🐋 Esqueleto de ballena azul suspendida del techo<br>• 🦣 Esqueleto de mamut prehistórico<br>• 💡 Túnel multimedia con proyecciones de luz<br>• 🔭 Cúpula mirador con vistas a la Plaza de Wenceslao<br><br>💡 <b>Cuándo ir:</b> Día 26 (Jueves) tras el Barrio Judío<br>🚇 Metro: Muzeum (Línea A y C) en la misma puerta</div>`)[0];
+                popup_3a0d806d6258e7775c84e401ad002416.setContent(html_df78a6343135b511980b894dc5791422);
+            
+        
+
+        marker_a3de60d1e25245ed39c78a5e78fed2c2.bindPopup(popup_3a0d806d6258e7775c84e401ad002416)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_a3de60d1e25245ed39c78a5e78fed2c2.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a3de60d1e25245ed39c78a5e78fed2c2.setIcon(div_icon_d2f5def23a7f4575a8bb77226037df5d);
+            
+    
+            feature_group_8568b01948f0e2804d66c86960026d36.addTo(map_1f8203ed229866597f03cbc37979a810);
+        
+    
+            var feature_group_a1e3de857f01843163f5988f13fef9ce = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_d480031fdefb33b39ef03cbf35d7b2a3 = L.marker(
+                [50.0722, 14.4038],
+                {
+}
+            ).addTo(feature_group_a1e3de857f01843163f5988f13fef9ce);
+        
+    
+            var div_icon_e110192bdac9ad2623aa449b6c9ed78d = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #DC143C;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf84\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMercado And\u011bl\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_d480031fdefb33b39ef03cbf35d7b2a3.bindTooltip(
+                `<div>
+                     Mercado de Anděl
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_5a3bc42f2e2e2e4194e99b0d54126d73 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4ae005603bdb310a9195af3e715ee458 = $(`<div id="html_4ae005603bdb310a9195af3e715ee458" style="width: 100.0%; height: 100.0%;"><b>🎄 MERCADO DE ANDĚL</b><br>Zona peatonal de Anděl (10:00 – 18:00 h)<br>📅 23 Nov – 24 Dic</div>`)[0];
+                popup_5a3bc42f2e2e2e4194e99b0d54126d73.setContent(html_4ae005603bdb310a9195af3e715ee458);
+            
+        
+
+        marker_d480031fdefb33b39ef03cbf35d7b2a3.bindPopup(popup_5a3bc42f2e2e2e4194e99b0d54126d73)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_d480031fdefb33b39ef03cbf35d7b2a3.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d480031fdefb33b39ef03cbf35d7b2a3.setIcon(div_icon_e110192bdac9ad2623aa449b6c9ed78d);
+            
+    
+            var marker_4d237bb43dce77e7a2a00f1db0aa725e = L.marker(
+                [50.0914, 14.4024],
+                {
+}
+            ).addTo(feature_group_a1e3de857f01843163f5988f13fef9ce);
+        
+    
+            var div_icon_e2480c7a565468f42087a9b836d9d7b6 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #DC143C;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf84\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMercado Castillo\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_4d237bb43dce77e7a2a00f1db0aa725e.bindTooltip(
+                `<div>
+                     Mercado del Castillo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_7841bc9f824a7c4dfa7e0e10517c528e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8ef07c354db48b0043ba4289295ecc37 = $(`<div id="html_8ef07c354db48b0043ba4289295ecc37" style="width: 100.0%; height: 100.0%;"><b>🎄 MERCADO DEL CASTILLO</b><br>Plaza de San Jorge (Miércoles 25)<br>📅 23 Nov – 6 Ene</div>`)[0];
+                popup_7841bc9f824a7c4dfa7e0e10517c528e.setContent(html_8ef07c354db48b0043ba4289295ecc37);
+            
+        
+
+        marker_4d237bb43dce77e7a2a00f1db0aa725e.bindPopup(popup_7841bc9f824a7c4dfa7e0e10517c528e)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_4d237bb43dce77e7a2a00f1db0aa725e.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4d237bb43dce77e7a2a00f1db0aa725e.setIcon(div_icon_e2480c7a565468f42087a9b836d9d7b6);
+            
+    
+            var marker_47305874c0ae62c6d6214ade791803a9 = L.marker(
+                [50.0886, 14.4292],
+                {
+}
+            ).addTo(feature_group_a1e3de857f01843163f5988f13fef9ce);
+        
+    
+            var div_icon_a1c786fe4daaa08c8300b1b9d261b9a2 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #DC143C;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf84\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMercado N\u00e1m. Republiky\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_47305874c0ae62c6d6214ade791803a9.bindTooltip(
+                `<div>
+                     Mercado Náměstí Republiky
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_a0e0207ba48e08e924fce8eca1859603 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_33ad145923e0e76c634284343bcfd879 = $(`<div id="html_33ad145923e0e76c634284343bcfd879" style="width: 100.0%; height: 100.0%;"><b>🎄 MERCADO NÁMĚSTÍ REPUBLIKY</b><br>Junto a Torre de la Pólvora (Jueves 26)<br>📅 25 Nov – 24 Dic</div>`)[0];
+                popup_a0e0207ba48e08e924fce8eca1859603.setContent(html_33ad145923e0e76c634284343bcfd879);
+            
+        
+
+        marker_47305874c0ae62c6d6214ade791803a9.bindPopup(popup_a0e0207ba48e08e924fce8eca1859603)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_47305874c0ae62c6d6214ade791803a9.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_47305874c0ae62c6d6214ade791803a9.setIcon(div_icon_a1c786fe4daaa08c8300b1b9d261b9a2);
+            
+    
+            var marker_08969464a556f9b863d89f6003ff217c = L.marker(
+                [50.0754, 14.4373],
+                {
+}
+            ).addTo(feature_group_a1e3de857f01843163f5988f13fef9ce);
+        
+    
+            var div_icon_0a099e50229fa854f4c877687d827506 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #DC143C;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf84\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMercado N\u00e1m. M\u00edru\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_08969464a556f9b863d89f6003ff217c.bindTooltip(
+                `<div>
+                     Mercado Náměstí Míru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_6dfd6f6717e8199ae81cad761d8f5481 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c62a83224840e55b7c40c2db43ffe65f = $(`<div id="html_c62a83224840e55b7c40c2db43ffe65f" style="width: 100.0%; height: 100.0%;"><b>🎄 MERCADO NÁMĚSTÍ MÍRU</b><br>Vinohrady (El favorito de los locales)<br>📅 20 Nov – 24 Dic</div>`)[0];
+                popup_6dfd6f6717e8199ae81cad761d8f5481.setContent(html_c62a83224840e55b7c40c2db43ffe65f);
+            
+        
+
+        marker_08969464a556f9b863d89f6003ff217c.bindPopup(popup_6dfd6f6717e8199ae81cad761d8f5481)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_08969464a556f9b863d89f6003ff217c.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_08969464a556f9b863d89f6003ff217c.setIcon(div_icon_0a099e50229fa854f4c877687d827506);
+            
+    
+            var marker_00e79b3bda054e72861c9598922b0e12 = L.marker(
+                [50.0879, 14.4217],
+                {
+}
+            ).addTo(feature_group_a1e3de857f01843163f5988f13fef9ce);
+        
+    
+            var div_icon_eabdc4145c5ed367c2a515c88e1a3b20 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFD700;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\u2b50\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eGran Mercado Ciudad Vieja\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_00e79b3bda054e72861c9598922b0e12.bindTooltip(
+                `<div>
+                     Gran Mercado Ciudad Vieja
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_f3fee1fe40cfe4a4f14c0f92aa0e5c74 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_72002ce52f8c395d83f2a93822ea967a = $(`<div id="html_72002ce52f8c395d83f2a93822ea967a" style="width: 100.0%; height: 100.0%;"><b>⭐ GRAN MERCADO CIUDAD VIEJA</b><br>Inauguración estelar el 28 de Noviembre<br>Árbol gigante y villancicos</div>`)[0];
+                popup_f3fee1fe40cfe4a4f14c0f92aa0e5c74.setContent(html_72002ce52f8c395d83f2a93822ea967a);
+            
+        
+
+        marker_00e79b3bda054e72861c9598922b0e12.bindPopup(popup_f3fee1fe40cfe4a4f14c0f92aa0e5c74)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_00e79b3bda054e72861c9598922b0e12.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_00e79b3bda054e72861c9598922b0e12.setIcon(div_icon_eabdc4145c5ed367c2a515c88e1a3b20);
+            
+    
+            feature_group_a1e3de857f01843163f5988f13fef9ce.addTo(map_1f8203ed229866597f03cbc37979a810);
+        
+    
+            var feature_group_fd00dc740dad28082740f0bfafd70f30 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_67639d21c496b7e57d402056749083a6 = L.marker(
+                [50.0768, 14.4021],
+                {
+}
+            ).addTo(feature_group_fd00dc740dad28082740f0bfafd70f30);
+        
+    
+            var div_icon_cde703490c30ad3b85269594d06e8aa4 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #8B4513;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\u2615\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eKav\u00e1rna Mezi \u0158\u00e1dky\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_67639d21c496b7e57d402056749083a6.bindTooltip(
+                `<div>
+                     Kavárna Mezi Řádky (Desayuno)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_80942560a870ad73b9d25e5a48a106fc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dc148dad17a91a74b19ef85d2c5a5d1d = $(`<div id="html_dc148dad17a91a74b19ef85d2c5a5d1d" style="width: 100.0%; height: 100.0%;"><b>☕ DESAYUNO: Kavárna Mezi Řádky</b><br>Štefánikova 40 (muy cerca de casa)<br>Abierto desde las 08:00 h</div>`)[0];
+                popup_80942560a870ad73b9d25e5a48a106fc.setContent(html_dc148dad17a91a74b19ef85d2c5a5d1d);
+            
+        
+
+        marker_67639d21c496b7e57d402056749083a6.bindPopup(popup_80942560a870ad73b9d25e5a48a106fc)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_67639d21c496b7e57d402056749083a6.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_67639d21c496b7e57d402056749083a6.setIcon(div_icon_cde703490c30ad3b85269594d06e8aa4);
+            
+    
+            var marker_63947ba89155b3c315a7046446793bcd = L.marker(
+                [50.0852, 14.4078],
+                {
+}
+            ).addTo(feature_group_fd00dc740dad28082740f0bfafd70f30);
+        
+    
+            var div_icon_09dd0533c3b008ee5dd8d675df73f560 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #8B4513;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\u2615\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eCaf\u00e9 Savoy\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_63947ba89155b3c315a7046446793bcd.bindTooltip(
+                `<div>
+                     Café Savoy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_592c984fc55b542ffa60de121374167f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_049aafabef57ae8e459c68ac7374ffc9 = $(`<div id="html_049aafabef57ae8e459c68ac7374ffc9" style="width: 100.0%; height: 100.0%;"><b>☕ DESAYUNO: Café Savoy</b><br>Vítězná (elegante cafetería tradicional)<br>Abierto desde las 08:00 h</div>`)[0];
+                popup_592c984fc55b542ffa60de121374167f.setContent(html_049aafabef57ae8e459c68ac7374ffc9);
+            
+        
+
+        marker_63947ba89155b3c315a7046446793bcd.bindPopup(popup_592c984fc55b542ffa60de121374167f)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_63947ba89155b3c315a7046446793bcd.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_63947ba89155b3c315a7046446793bcd.setIcon(div_icon_09dd0533c3b008ee5dd8d675df73f560);
+            
+    
+            var marker_035cb5df6837d669370e9161ea752885 = L.marker(
+                [50.0759, 14.4048],
+                {
+}
+            ).addTo(feature_group_fd00dc740dad28082740f0bfafd70f30);
+        
+    
+            var div_icon_4713f63e822d70d42db7220ade77dcb9 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #8B4513;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf7d\ufe0f\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eRest. U Deloveho Krize\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_035cb5df6837d669370e9161ea752885.bindTooltip(
+                `<div>
+                     Restaurante U Deloveho Krize
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_fef409fcd8ccd9991a61bc658b575e32 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_057440f81682cc5eec4b2d713653ecde = $(`<div id="html_057440f81682cc5eec4b2d713653ecde" style="width: 100.0%; height: 100.0%;"><b>🍽️ CENA: U Deloveho Krize</b><br>Štefánikova 48 (comida tradicional checa familiar)</div>`)[0];
+                popup_fef409fcd8ccd9991a61bc658b575e32.setContent(html_057440f81682cc5eec4b2d713653ecde);
+            
+        
+
+        marker_035cb5df6837d669370e9161ea752885.bindPopup(popup_fef409fcd8ccd9991a61bc658b575e32)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_035cb5df6837d669370e9161ea752885.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_035cb5df6837d669370e9161ea752885.setIcon(div_icon_4713f63e822d70d42db7220ade77dcb9);
+            
+    
+            var marker_c3d2031772f17991bc872a3844532edf = L.marker(
+                [50.0738, 14.4022],
+                {
+}
+            ).addTo(feature_group_fd00dc740dad28082740f0bfafd70f30);
+        
+    
+            var div_icon_ea2dffe7390ecfbc30591ad8fab5b379 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #8B4513;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf7d\ufe0f\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eRest. Tradice\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_c3d2031772f17991bc872a3844532edf.bindTooltip(
+                `<div>
+                     Restaurante Tradice
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_8fe7375dccb702497c0957d1fec28e45 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_755d4e0771d1b134d62723791cb0706e = $(`<div id="html_755d4e0771d1b134d62723791cb0706e" style="width: 100.0%; height: 100.0%;"><b>🍽️ CENA: Tradice</b><br>Radlická (comida tradicional checa)</div>`)[0];
+                popup_8fe7375dccb702497c0957d1fec28e45.setContent(html_755d4e0771d1b134d62723791cb0706e);
+            
+        
+
+        marker_c3d2031772f17991bc872a3844532edf.bindPopup(popup_8fe7375dccb702497c0957d1fec28e45)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_c3d2031772f17991bc872a3844532edf.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_c3d2031772f17991bc872a3844532edf.setIcon(div_icon_ea2dffe7390ecfbc30591ad8fab5b379);
+            
+    
+            var marker_1e0fcce4a7063fe29de9f653b9254190 = L.marker(
+                [50.0726, 14.4014],
+                {
+}
+            ).addTo(feature_group_fd00dc740dad28082740f0bfafd70f30);
+        
+    
+            var div_icon_3a60f9d4c29f05bc565423cd2f3ab885 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #006400;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\uded2\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTesco Nov\u00fd Sm\u00edchov\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_1e0fcce4a7063fe29de9f653b9254190.bindTooltip(
+                `<div>
+                     Tesco Nový Smíchov (Hipermercado)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_c47f69de066c00a6fe8b9aea1adc61c6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6f63c97070f73904155de867f4f6a278 = $(`<div id="html_6f63c97070f73904155de867f4f6a278" style="width: 100.0%; height: 100.0%;"><b>🛒 TESCO (Nový Smíchov)</b><br>Gran hipermercado (06:00 – 00:00 h)</div>`)[0];
+                popup_c47f69de066c00a6fe8b9aea1adc61c6.setContent(html_6f63c97070f73904155de867f4f6a278);
+            
+        
+
+        marker_1e0fcce4a7063fe29de9f653b9254190.bindPopup(popup_c47f69de066c00a6fe8b9aea1adc61c6)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_1e0fcce4a7063fe29de9f653b9254190.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_1e0fcce4a7063fe29de9f653b9254190.setIcon(div_icon_3a60f9d4c29f05bc565423cd2f3ab885);
+            
+    
+            var marker_46262bd6e049152b22216ffb5e9f6e60 = L.marker(
+                [50.0768, 14.4055],
+                {
+}
+            ).addTo(feature_group_fd00dc740dad28082740f0bfafd70f30);
+        
+    
+            var div_icon_8dc3506eff721739bb70adbd3c42a9c0 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #006400;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\uded2\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTesco Expr\u00e9s\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_46262bd6e049152b22216ffb5e9f6e60.bindTooltip(
+                `<div>
+                     Tesco Exprés
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_b12c31ec0f11cfcab98d22cb003df681 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5bc2b50ad888019bc368b573a8474ae0 = $(`<div id="html_5bc2b50ad888019bc368b573a8474ae0" style="width: 100.0%; height: 100.0%;"><b>🛒 TESCO EXPRÉS</b><br>Arbesovo náměstí 8 (supermercado rápido junto a casa)</div>`)[0];
+                popup_b12c31ec0f11cfcab98d22cb003df681.setContent(html_5bc2b50ad888019bc368b573a8474ae0);
+            
+        
+
+        marker_46262bd6e049152b22216ffb5e9f6e60.bindPopup(popup_b12c31ec0f11cfcab98d22cb003df681)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_46262bd6e049152b22216ffb5e9f6e60.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_46262bd6e049152b22216ffb5e9f6e60.setIcon(div_icon_8dc3506eff721739bb70adbd3c42a9c0);
+            
+    
+            var marker_8ca6a4cf5fea4a2f62f46900e7a9edc0 = L.marker(
+                [50.0795, 14.4539],
+                {
+}
+            ).addTo(feature_group_fd00dc740dad28082740f0bfafd70f30);
+        
+    
+            var div_icon_a6d6fe6eb182ef5f623c9794f4cba903 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #8B4513;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udf55\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003ePizzeria Roma Uno\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_8ca6a4cf5fea4a2f62f46900e7a9edc0.bindTooltip(
+                `<div>
+                     Pizzeria Roma Uno
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_97ccca41954550d8364a26d9a797c55f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fd72337f48ceb03f717949d9de34ba9b = $(`<div id="html_fd72337f48ceb03f717949d9de34ba9b" style="width: 100.0%; height: 100.0%;"><b>🍕 PIZZERIA ROMA UNO</b><br>📍 Jagellonská 16, Vinohrady<br>🕐 Horario: 24 horas (Non-stop)<br>🍕 39 tipos de pizza, pasta y cocina italiana<br>🎯 Ideal para cenas tardías o después de visitar el Museo Nacional</div>`)[0];
+                popup_97ccca41954550d8364a26d9a797c55f.setContent(html_fd72337f48ceb03f717949d9de34ba9b);
+            
+        
+
+        marker_8ca6a4cf5fea4a2f62f46900e7a9edc0.bindPopup(popup_97ccca41954550d8364a26d9a797c55f)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_8ca6a4cf5fea4a2f62f46900e7a9edc0.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_8ca6a4cf5fea4a2f62f46900e7a9edc0.setIcon(div_icon_a6d6fe6eb182ef5f623c9794f4cba903);
+            
+    
+            var feature_group_6d81f7d516915bce28ca7103716f318d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_9db615c3596749e1bcdff10656f1869b = L.marker(
+                [50.0712, 14.4045],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_bb805fb9fed7b50bba844a4c547fe768 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #1E90FF;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude87\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMetro And\u011bl (L\u00ednea B)\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_9db615c3596749e1bcdff10656f1869b.bindTooltip(
+                `<div>
+                     Metro Anděl
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_4e39bab9950c352eeafde351b770c48a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9dc1f3d6ab3601879fc00a50bc940420 = $(`<div id="html_9dc1f3d6ab3601879fc00a50bc940420" style="width: 100.0%; height: 100.0%;"><b>🚇 METRO ANDĚL (Línea B)</b><br>Base de salida. Comprar abono 72h aquí.<br>🚌 Conexión Bus 191 Aeropuerto</div>`)[0];
+                popup_4e39bab9950c352eeafde351b770c48a.setContent(html_9dc1f3d6ab3601879fc00a50bc940420);
+            
+        
+
+        marker_9db615c3596749e1bcdff10656f1869b.bindPopup(popup_4e39bab9950c352eeafde351b770c48a)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_9db615c3596749e1bcdff10656f1869b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_9db615c3596749e1bcdff10656f1869b.setIcon(div_icon_bb805fb9fed7b50bba844a4c547fe768);
+            
+    
+            var marker_253d6e60d37cb8f94487cd0dd872c93f = L.marker(
+                [50.0827, 14.4188],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_26e7715e5cf0dff862e6b432d82fe0ff = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #1E90FF;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude87\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMetro N\u00e1rodn\u00ed t\u0159\u00edda\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_253d6e60d37cb8f94487cd0dd872c93f.bindTooltip(
+                `<div>
+                     Metro Národní třída
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_fa4a3ad47ea173b327f3921a35c01de5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_859b4f10fad2d7647dbcfe9b9a6db56c = $(`<div id="html_859b4f10fad2d7647dbcfe9b9a6db56c" style="width: 100.0%; height: 100.0%;"><b>🚇 METRO NÁRODNÍ TŘÍDA (Línea B)</b><br>Para transbordo a Tranvía 22 al Castillo y acceso a Kafka/Quadrio</div>`)[0];
+                popup_fa4a3ad47ea173b327f3921a35c01de5.setContent(html_859b4f10fad2d7647dbcfe9b9a6db56c);
+            
+        
+
+        marker_253d6e60d37cb8f94487cd0dd872c93f.bindPopup(popup_fa4a3ad47ea173b327f3921a35c01de5)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_253d6e60d37cb8f94487cd0dd872c93f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_253d6e60d37cb8f94487cd0dd872c93f.setIcon(div_icon_26e7715e5cf0dff862e6b432d82fe0ff);
+            
+    
+            var marker_dbd8c3e592471e4100d955ecd3c91a97 = L.marker(
+                [50.0829, 14.4221],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_215022e925c63d1c3c862b0ab554122a = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #1E90FF;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude87\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMetro M\u016fstek\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_dbd8c3e592471e4100d955ecd3c91a97.bindTooltip(
+                `<div>
+                     Metro Můstek
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_66df537e127900526d1b1fc2cd3fa396 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_72cc20558fd444a55f3499da597c270e = $(`<div id="html_72cc20558fd444a55f3499da597c270e" style="width: 100.0%; height: 100.0%;"><b>🚇 METRO MŮSTEK (Línea B/A)</b><br>Centro histórico / Plaza Ciudad Vieja (a 3 paradas de Anděl)</div>`)[0];
+                popup_66df537e127900526d1b1fc2cd3fa396.setContent(html_72cc20558fd444a55f3499da597c270e);
+            
+        
+
+        marker_dbd8c3e592471e4100d955ecd3c91a97.bindPopup(popup_66df537e127900526d1b1fc2cd3fa396)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_dbd8c3e592471e4100d955ecd3c91a97.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_dbd8c3e592471e4100d955ecd3c91a97.setIcon(div_icon_215022e925c63d1c3c862b0ab554122a);
+            
+    
+            var marker_efdbd48f27f690cde9f8e7909ba66170 = L.marker(
+                [50.0895, 14.4305],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_9adbf0139d4a59dcaed7cc887ff75bf3 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #1E90FF;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude87\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eMetro N\u00e1m. Republiky\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_efdbd48f27f690cde9f8e7909ba66170.bindTooltip(
+                `<div>
+                     Metro Náměstí Republiky
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_2221eefc9539cc2287002092879e55f2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d444497c6a677d5cf9882d2bf1be59bf = $(`<div id="html_d444497c6a677d5cf9882d2bf1be59bf" style="width: 100.0%; height: 100.0%;"><b>🚇 METRO NÁMĚSTÍ REPUBLIKY (Línea B)</b><br>Junto a Torre de la Pólvora. Directo desde Anděl.</div>`)[0];
+                popup_2221eefc9539cc2287002092879e55f2.setContent(html_d444497c6a677d5cf9882d2bf1be59bf);
+            
+        
+
+        marker_efdbd48f27f690cde9f8e7909ba66170.bindPopup(popup_2221eefc9539cc2287002092879e55f2)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_efdbd48f27f690cde9f8e7909ba66170.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_efdbd48f27f690cde9f8e7909ba66170.setIcon(div_icon_9adbf0139d4a59dcaed7cc887ff75bf3);
+            
+    
+            var marker_b933863232f0fcf1e15964e0d4ad947f = L.marker(
+                [50.0933, 14.3995],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_aba29114503c56e782751a0471f94599 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #32CD32;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude8b\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTranv\u00eda 22 (Pra\u017esk\u00fd hrad)\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_b933863232f0fcf1e15964e0d4ad947f.bindTooltip(
+                `<div>
+                     Tranvía 22 – Pražský hrad
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_44704e41c9d45ce529822ef064af5cee = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8bf6cc988822de7d817bc28ed6e014ca = $(`<div id="html_8bf6cc988822de7d817bc28ed6e014ca" style="width: 100.0%; height: 100.0%;"><b>🚋 TRANVÍA 22 – Pražský hrad</b><br>Sube a la puerta norte del Castillo (ahorra 20 min de cuesta)</div>`)[0];
+                popup_44704e41c9d45ce529822ef064af5cee.setContent(html_8bf6cc988822de7d817bc28ed6e014ca);
+            
+        
+
+        marker_b933863232f0fcf1e15964e0d4ad947f.bindPopup(popup_44704e41c9d45ce529822ef064af5cee)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_b933863232f0fcf1e15964e0d4ad947f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_b933863232f0fcf1e15964e0d4ad947f.setIcon(div_icon_aba29114503c56e782751a0471f94599);
+            
+    
+            var marker_735ec3106bbd2c7c3e09fb448276f5fb = L.marker(
+                [50.0881, 14.4055],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_e4478193a0129bdb169e3b81541cfb82 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #32CD32;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude8b\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTranv\u00eda 12, 15, 20 (Malostransk\u00e9)\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_735ec3106bbd2c7c3e09fb448276f5fb.bindTooltip(
+                `<div>
+                     Tranvía 12, 15, 20 – Malostranské náměstí
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_abf31314c43866dc4ad8ce506847b8a9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_75c267d8243e0c92cc16934994372a3b = $(`<div id="html_75c267d8243e0c92cc16934994372a3b" style="width: 100.0%; height: 100.0%;"><b>🚋 TRANVÍA 12, 15, 20 – Malostranské nám.</b><br>Regreso directo desde Puente de Carlos hasta la puerta de casa</div>`)[0];
+                popup_abf31314c43866dc4ad8ce506847b8a9.setContent(html_75c267d8243e0c92cc16934994372a3b);
+            
+        
+
+        marker_735ec3106bbd2c7c3e09fb448276f5fb.bindPopup(popup_abf31314c43866dc4ad8ce506847b8a9)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_735ec3106bbd2c7c3e09fb448276f5fb.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_735ec3106bbd2c7c3e09fb448276f5fb.setIcon(div_icon_e4478193a0129bdb169e3b81541cfb82);
+            
+    
+            var marker_5ec7926e59aa44d44edbdfd411a87afa = L.marker(
+                [50.0768, 14.4094],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_a2ab4ec431966cc5c36d25b0acb9d50c = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #32CD32;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude8b\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTranv\u00eda 9, 12, 15, 20 (\u00dajezd)\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_5ec7926e59aa44d44edbdfd411a87afa.bindTooltip(
+                `<div>
+                     Tranvía Újezd
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_47b657b2340312cf27f6a5be120b6c6e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f53c2499ec0c4333919cb8920838e332 = $(`<div id="html_f53c2499ec0c4333919cb8920838e332" style="width: 100.0%; height: 100.0%;"><b>🚋 TRANVÍA ÚJEZD</b><br>A 2 paradas de casa. Conexión con Funicular a Petřín</div>`)[0];
+                popup_47b657b2340312cf27f6a5be120b6c6e.setContent(html_f53c2499ec0c4333919cb8920838e332);
+            
+        
+
+        marker_5ec7926e59aa44d44edbdfd411a87afa.bindPopup(popup_47b657b2340312cf27f6a5be120b6c6e)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_5ec7926e59aa44d44edbdfd411a87afa.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5ec7926e59aa44d44edbdfd411a87afa.setIcon(div_icon_a2ab4ec431966cc5c36d25b0acb9d50c);
+            
+    
+            var marker_d94f5c62502ca0731098f3c3de7d3611 = L.marker(
+                [50.0698, 14.403],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_5d371604c501a24fcdcb2e0911f5e73b = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FFA500;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude8c\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eBus 191 (Aeropuerto)\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_d94f5c62502ca0731098f3c3de7d3611.bindTooltip(
+                `<div>
+                     Bus 191 Aeropuerto
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_8039409d978212e08b77e92ffd5297d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_72b915e7249c12a79357f02afc9db820 = $(`<div id="html_72b915e7249c12a79357f02afc9db820" style="width: 100.0%; height: 100.0%;"><b>🚌 BUS 191 – Conexión Aeropuerto PRG ↔ Anděl</b><br>⏱️ 45-50 min. 40 CZK adulto. Niños <15 GRATIS.<br>🚕 Alternativa: Taxi/Bolt 25-35 min (~650 CZK)</div>`)[0];
+                popup_8039409d978212e08b77e92ffd5297d8.setContent(html_72b915e7249c12a79357f02afc9db820);
+            
+        
+
+        marker_d94f5c62502ca0731098f3c3de7d3611.bindPopup(popup_8039409d978212e08b77e92ffd5297d8)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_d94f5c62502ca0731098f3c3de7d3611.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d94f5c62502ca0731098f3c3de7d3611.setIcon(div_icon_5d371604c501a24fcdcb2e0911f5e73b);
+            
+    
+            var marker_cd4a7c3426b00a82b014e2b2170e3c28 = L.marker(
+                [50.0676, 14.4078],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_fcfda531178d85e9d59db059cf9fd4d5 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #8A2BE2;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\ude86\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eTren S7 (Praha-Sm\u00edchov)\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_cd4a7c3426b00a82b014e2b2170e3c28.bindTooltip(
+                `<div>
+                     Tren S7 Praha-Smíchov
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_b79eaca42dc443692d6bc0a7aff179fe = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_25829dd95e807e24c243b481f92f22e4 = $(`<div id="html_25829dd95e807e24c243b481f92f22e4" style="width: 100.0%; height: 100.0%;"><b>🚆 TREN S7 – Praha-Smíchov ➔ Karlštejn</b><br>Estación a 1 parada de Anděl. 40 min de trayecto directo.<br>📅 Viernes 27: salida 09:00-09:30 h</div>`)[0];
+                popup_b79eaca42dc443692d6bc0a7aff179fe.setContent(html_25829dd95e807e24c243b481f92f22e4);
+            
+        
+
+        marker_cd4a7c3426b00a82b014e2b2170e3c28.bindPopup(popup_b79eaca42dc443692d6bc0a7aff179fe)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_cd4a7c3426b00a82b014e2b2170e3c28.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_cd4a7c3426b00a82b014e2b2170e3c28.setIcon(div_icon_fcfda531178d85e9d59db059cf9fd4d5);
+            
+    
+            var marker_87ff909c5c6a3d01f42a1214e76da059 = L.marker(
+                [50.0825, 14.398],
+                {
+}
+            ).addTo(feature_group_6d81f7d516915bce28ca7103716f318d);
+        
+    
+            var div_icon_3d055a9b3be7ac4bc5efdeca6e669969 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #FF69B4;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83d\udea1\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003eFunicular Pet\u0159\u00edn\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_87ff909c5c6a3d01f42a1214e76da059.bindTooltip(
+                `<div>
+                     Funicular Petřín
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_9d6960e3c3297d2503fbad42c49a193d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_168b6648fd6861900a81882e791d08d5 = $(`<div id="html_168b6648fd6861900a81882e791d08d5" style="width: 100.0%; height: 100.0%;"><b>🚡 FUNICULAR COLINA DE PETŘÍN</b><br>🕐 09:00 – 23:20 h (integrado en abono 72h)<br>Subida al Laberinto de Espejos y Torre Mirador</div>`)[0];
+                popup_9d6960e3c3297d2503fbad42c49a193d.setContent(html_168b6648fd6861900a81882e791d08d5);
+            
+        
+
+        marker_87ff909c5c6a3d01f42a1214e76da059.bindPopup(popup_9d6960e3c3297d2503fbad42c49a193d)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_87ff909c5c6a3d01f42a1214e76da059.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_87ff909c5c6a3d01f42a1214e76da059.setIcon(div_icon_3d055a9b3be7ac4bc5efdeca6e669969);
+            
+    
+            feature_group_6d81f7d516915bce28ca7103716f318d.addTo(map_1f8203ed229866597f03cbc37979a810);
+        
+    
+            var feature_group_969a5974b57308371ed8f619aa98bd03 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_97ffeb62c79056e9e29f494a92afadcf = L.marker(
+                [48.8127, 14.314],
+                {
+}
+            ).addTo(feature_group_969a5974b57308371ed8f619aa98bd03);
+        
+    
+            var div_icon_1d6bb38b47c56bd168b9154d54a63687 = L.divIcon({
+  "html": "\n    \u003cdiv style=\"position: relative; display: flex; flex-direction: column; align-items: center; pointer-events: auto;\"\u003e\n        \u003cdiv style=\"\n            font-size: 20px;\n            background-color: #8B4513;\n            border: 2px solid white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.4);\n            width: 36px;\n            height: 36px;\n            cursor: pointer;\n        \"\u003e\ud83c\udff0\u003c/div\u003e\n        \u003cdiv style=\"\n            margin-top: 3px;\n            background: rgba(255, 255, 255, 0.95);\n            border: 1px solid #444;\n            border-radius: 4px;\n            padding: 1px 5px;\n            font-size: 11px;\n            font-weight: 700;\n            color: #111;\n            white-space: nowrap;\n            box-shadow: 0 1px 3px rgba(0,0,0,0.3);\n            pointer-events: none;\n        \"\u003e\u010cesk\u00fd Krumlov\u003c/div\u003e\n    \u003c/div\u003e\n    ",
+  "iconSize": [160, 60],
+  "iconAnchor": [80, 18],
+  "className": "empty",
+});
+        
+    
+            marker_97ffeb62c79056e9e29f494a92afadcf.bindTooltip(
+                `<div>
+                     Český Krumlov (Retirado ~175 km)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_38d19ef5a0c5872931ff900fa35517e7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_506c433bd01d3be5a539d261168c7565 = $(`<div id="html_506c433bd01d3be5a539d261168c7565" style="width: 100.0%; height: 100.0%;"><b>🏰 ČESKÝ KRUMLOV (Ciudad Medieval)</b><br>📍 Ubicación: ~175 km al Sur de Praga<br>⏱️ Tiempo: 2h 45m - 3h trayecto<br>📅 Día completo (Sugerido: 08:30 - 19:30 h)<br><br>📝 Ciudad Medieval Patrimonio UNESCO. Se encuentra retirada de Praga. Requiere dedicar un día entero.<br>🚌 Transporte: Bus directo desde Na Knížecí o Florenc.</div>`)[0];
+                popup_38d19ef5a0c5872931ff900fa35517e7.setContent(html_506c433bd01d3be5a539d261168c7565);
+            
+        
+
+        marker_97ffeb62c79056e9e29f494a92afadcf.bindPopup(popup_38d19ef5a0c5872931ff900fa35517e7)
+        ;
+
+        
+    
+    
+                {
+                    const element = marker_97ffeb62c79056e9e29f494a92afadcf.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_97ffeb62c79056e9e29f494a92afadcf.setIcon(div_icon_1d6bb38b47c56bd168b9154d54a63687);
+            
+    
+            var layer_control_2ed7247b130f5ea4b856406a5af9534b_layers = {
+                base_layers : {
+                    "\ud83d\uddfa\ufe0f Google Maps (Calles a color)" : tile_layer_a8fdb63750cc515756f0016fd480e229,
+                    "\u26f0\ufe0f Google Relieve / Terreno" : tile_layer_9821f6da225a64d4b33ee84f222077f3,
+                    "\ud83d\udef0\ufe0f Google Sat\u00e9lite H\u00edbrido" : tile_layer_b54f5d13b73a1222029db69e8c2bddea,
+                    "\ud83c\udfa8 CARTO Voyager" : tile_layer_a04ea0a19b4defc8d6d3a1659f9b7d51,
+                },
+                overlays :  {
+                    "\ud83c\udfe1 Alojamiento" : feature_group_8fa7f9a5d59207f094005815cda8603b,
+                    "\ud83c\udff0 Monumentos Principales" : feature_group_064bbffaf729cd90dcc0b833d37151f4,
+                    "\ud83c\udf3f Sugerencias y Nuevos Puntos" : feature_group_8568b01948f0e2804d66c86960026d36,
+                    "\ud83c\udf84 Mercados Navide\u00f1os" : feature_group_a1e3de857f01843163f5988f13fef9ce,
+                    "\u2615 Gastronom\u00eda y Supermercados" : feature_group_fd00dc740dad28082740f0bfafd70f30,
+                    "\ud83d\ude87 Red de Transporte" : feature_group_6d81f7d516915bce28ca7103716f318d,
+                    "\ud83d\udccd Otros lugares (Fuera de Praga)" : feature_group_969a5974b57308371ed8f619aa98bd03,
+                },
+            };
+            let layer_control_2ed7247b130f5ea4b856406a5af9534b = L.control.layers(
+                layer_control_2ed7247b130f5ea4b856406a5af9534b_layers.base_layers,
+                layer_control_2ed7247b130f5ea4b856406a5af9534b_layers.overlays,
+                {
+  "position": "topleft",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_1f8203ed229866597f03cbc37979a810);
+
+        
+</script>
+</html>
